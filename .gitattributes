@@ -9,3 +9,4 @@
 *.hpp text eol=crlf autocrlf=false
 *.cpp text eol=crlf autocrlf=false
 *.rvmat text eol=crlf autocrlf=false
+*.paa filter=lfs diff=lfs merge=lfs -text

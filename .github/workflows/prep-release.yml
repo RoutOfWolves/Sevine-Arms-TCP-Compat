@@ -1,0 +1,44 @@
+name: Prep Release
+
+on:
+  pull_request:
+    types: [opened, labeled, synchronize, reopened, unlabeled]
+    branches:
+      - '*'
+
+jobs:
+  prep-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+    - name: Check for release label
+      id: check_label
+      uses: egmacke/action-check-label@v3
+      with:
+        label: release
+        fail_on_error: false
+
+    - name: Stop if no release label
+      if: steps.check_label.outputs.pass != 'true'
+      run: |
+        echo "No release label found. Skipping job."
+        exit 0
+
+    - name: Checkout repository
+      if: steps.check_label.outputs.pass == 'true'
+      uses: actions/checkout@v4.2.2
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Run prepRelease.ps1
+      if: steps.check_label.outputs.pass == 'true'
+      run: pwsh ./prepRelease.ps1 -CI -Debug
+
+    - name: Commit and push changes
+      if: steps.check_label.outputs.pass == 'true' && success()
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "Automated prep release"

@@ -1,0 +1,28 @@
+name: "HEMTT Build"
+on:
+- pull_request
+
+jobs:
+  hemtt-build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4.2.2
+    - name: Setup HEMTT
+      uses: arma-actions/hemtt@v1
+    # TODO: get the steam part working so that configs can be checked better
+    #- name: Steam - Download
+    #  uses: dhkatz/steam-download@v1.2.0
+    #  with:
+    #    # Steam username
+    #    username: ${{ secrets.STEAM_USERNAME }} # default is anonymous
+    #    # Steam password
+    #    password: ${{ secrets.STEAM_PASSWORD }}# optional
+    #    # Steam TOTP code
+    #    #totp: # optional
+    #    # Path to VDF file containing login details
+    #    #vdf: # optional
+    #    # Steam AppID
+    #    appid: 233800 # https://store.steampowered.com/app/233800/Arma_3_Tools/
+    #    # Path to download the game to
+    #    #path: # optional
+    - run: hemtt build

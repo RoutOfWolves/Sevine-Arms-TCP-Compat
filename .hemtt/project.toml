@@ -1,5 +1,5 @@
-name = "ArmA-3-Mod-Template"
-author = "Lupus590"
+name = "Sevine Arms TCP Compat"
+author = "RoutOfWolves"
 prefix = "template"
 mainprefix = "z"
 
@@ -15,7 +15,7 @@ include = [
 ]
 
 [hemtt.release]
-folder = "ArmA-3-Mod-Template"
+folder = "Sevine Arms TCP Compat"
 
 [hemtt.launch.default]
 presets = [

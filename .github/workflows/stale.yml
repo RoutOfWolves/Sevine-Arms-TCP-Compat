@@ -1,0 +1,79 @@
+# This workflow warns and then closes issues and PRs that have had no activity for a specified amount of time.
+#
+# You can adjust the behavior by modifying this file.
+# For more information, see:
+# https://github.com/actions/stale
+name: Mark stale branches, issues and pull requests
+
+on:
+  schedule:
+  - cron: '0 0 * * 6' # every saturday at midnight UTC
+  workflow_dispatch: # manual trigger
+
+jobs:
+  stale-prs-and-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+    - uses: actions/stale@v9.0.0
+      with:
+        days-before-pr-close: 7
+        days-before-issue-close: -1
+        include-only-assigned: true
+        stale-issue-message: 'This issue has been assigned for 60 days without visible progress, maybe it should be unassigned and returned to the todo column?'
+        stale-pr-message: 'This PR has had no activity for 60 days, it will be automatically closed in 7 days.'
+  stale-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Find stale branches
+      id: find_stale_branches
+      run: |
+        SECONDS_IN_A_DAY=86400
+        NUMBER_OF_DAYS_BEFORE_STALE=60
+        git fetch --all
+        stale_branches=$(git branch -r --sort=-committerdate | grep -v '\->' | while read branch; do
+          last_commit=$(git log -1 --format=%ct $branch)
+          current_time=$(date +%s)
+          diff=$(( (current_time - last_commit) / SECONDS_IN_A_DAY )) # diff is days
+          if [ $diff -gt $NUMBER_OF_DAYS_BEFORE_STALE ]; then
+            echo ${branch#origin/}
+          fi
+        done)
+        stale_branches=$(echo "$stale_branches" | tr '\n' ' ')
+        echo "stale_branches=$stale_branches" >> $GITHUB_ENV
+    - name: Close old issue and create new issue for stale branches
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'stale-branches'
+          });
+          const issueTitle = 'Stale branches detected';
+          let issue = issues.find(issue => issue.title === issueTitle);
+          if (issue) {
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              state: 'closed'
+            });
+          }
+          const branches = process.env.stale_branches.trim();
+          if (branches) {
+            const branchList = "\n - " + branches.split(' ').join("\n - ").trimEnd();
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: `The following branches have had no activity for over 60 days: ${branchList}`,
+              labels: ['stale-branches']
+            });
+          }

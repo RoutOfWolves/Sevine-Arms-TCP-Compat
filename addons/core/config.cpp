@@ -2,10 +2,10 @@
 
 class CfgPatches
 {
-	class Template_Core
+	class SATCPCOMPAT
 	{
-		name = "Template - Core";
-		author = "Lupus590";
+		name = "Sevine Arms TCP Compat";
+		author = "RoutOfWolves";
 		units[] = {};
 		weapons[] = {};
 		requiredAddons[] =
@@ -22,9 +22,9 @@ class CfgSettings
 	{
 		class Versioning // https://github.com/CBATeam/CBA_A3/wiki/Versioning-System
 		{
-			class Template_Core
+			class SATCPCOMPAT
 			{
-				main_addon = "Template_Core";
+				main_addon = "SATCPCOMPAT";
 			};
 		};
 	};
