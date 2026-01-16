@@ -1,0 +1,22 @@
+name: "Editor Config Enforcer"
+on:
+  - pull_request
+
+jobs:
+  editor-config-enforcer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - run: git config --global core.autocrlf false
+      - run: git config --global core.eol crlf
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Run eclint in fix mode
+        run: npx eclint fix '**/*'
+      - name: Commit and push fixes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: fix .editorconfig issues automatically"

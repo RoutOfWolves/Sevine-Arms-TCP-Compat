@@ -1,0 +1,23 @@
+meta:
+- changed-files:
+    - any-glob-to-any-file: ['meta/**', '.github/**', '.hemtt/**', '.editorconfig', '.gitattributes', '.gitignore', '*.bat', '*.ps1', '*.sh', '*.md']
+
+documentation:
+- changed-files:
+    - any-glob-to-any-file: ['meta/doc/**']
+
+"area: config":
+- changed-files:
+    - any-glob-to-any-file: ['**/*.hpp', '**/*.cpp', '**/*.rvmat']
+
+"area: model":
+- changed-files:
+    - any-glob-to-any-file: ['**/*.p3d']
+
+"area: texture":
+- changed-files:
+    - any-glob-to-any-file: ['**/*.paa', '**/*.png']
+
+"area: script":
+- changed-files:
+    - any-glob-to-any-file: ['**/*.sqf']

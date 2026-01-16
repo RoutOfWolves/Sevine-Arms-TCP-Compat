@@ -1,0 +1,55 @@
+name: Make Release
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    labels:
+      - release
+
+# TODO: get this working
+# TODO: update ./meta/doc/Release_Steps.md once this is working
+
+jobs:
+  make-release:
+    runs-on: windows-latest
+    if: github.event.pull_request.merged == true
+    permissions:
+      contents: write
+    steps:
+    - name: Check for release label
+      id: check_label
+      uses: egmacke/action-check-label@v3
+      with:
+        label: release
+        fail_on_error: false
+    - uses: actions/checkout@v4.2.2
+    - name: Setup HEMTT
+      uses: arma-actions/hemtt@v1
+    #- name: Steam - Download
+    #  uses: dhkatz/steam-download@v1.2.0
+    #  with:
+    #    # Steam username
+    #    username: ${{ secrets.STEAM_USERNAME }} # default is anonymous
+    #    # Steam password
+    #    password: ${{ secrets.STEAM_PASSWORD }}# optional
+    #    # Steam TOTP code
+    #    #totp: # optional
+    #    # Path to VDF file containing login details
+    #    #vdf: # optional
+    #    # Steam AppID
+    #    appid: 233800 # https://store.steampowered.com/app/233800/Arma_3_Tools/
+    #    # Path to download the game to
+    #    #path: # optional
+    - run: hemtt release
+    # TODO: create a release on GitHub with the build attached
+
+    # TODO upload to steam workshop
+    - uses: actions/upload-artifact@v4
+      with:
+        name: 'release-build'
+        path: 'releases/ArmA-3-Mod-Template.zip'
+        if-no-files-found: 'warn' # Optional
+        retention-days: 1 # Optional

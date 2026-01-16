@@ -1,0 +1,1 @@
+* @yourOrganisation/senior-developers
