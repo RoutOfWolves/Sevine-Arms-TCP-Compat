@@ -1,25 +1,10 @@
-# ArmA 3 Mod Template
+# Sevine Arms TCP Compat
 
-This repository provides a template for creating and organizing an ArmA 3 mod project.
+This repository is for making a rebalance mod for Sevine Arms to match TCP's Balancing.
 
 ## About
 
-This template is designed to help you quickly start developing your own ArmA 3 mods by providing a well-organized project structure, example configuration files, and clear documentation.
-It aims to simplify setup, encourage best practices, and save time for both new and experienced modders.
-
-You are encouraged to customize any part of the template to fit your project's needs.
-
-## Getting Started
-
-1. Click on `Use this template` (green button top right).
-2. Run any of the `setup` scripts, you may need to install powershell.
-3. Once setup has successfully ran you can delete the `setup`, `convertToLFS`, and `enableWorkflows` script files as you will nolonger need them.
-4. Choose a license for your project (see `LICENSE.md`).
-5. Update `.hemtt/presets/main.html` with your modlist.
-6. Edit `.hemtt/project.toml` with your project details.
-7. Fix the prefix for the core addon.
-8. Review and adjust the documentation in `meta/doc/*` to fit your workflow.
-9. Update this README to reflect your project.
+This is a rebalance mod for the Sevine Arms mods by Cyntaurus for compatibility with The Cole Protocol by Black Element Studios
 
 ## Requirements
 
@@ -32,7 +17,7 @@ You are encouraged to customize any part of the template to fit your project's n
 
 ## License
 
-This template is licensed under [CC0 1.0 Universal](LICENSE.md).
+This mod is licensed under the [Arma Public License Share Alike (APL-SA)](LICENSE.md).
 
 
 
