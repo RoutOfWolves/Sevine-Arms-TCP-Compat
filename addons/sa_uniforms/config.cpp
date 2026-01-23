@@ -10,7 +10,6 @@ class CfgPatches
 		{
 			"TKE_Uniform_Revamp",
 			"TKE_Rogue_Uniform",
-			"A3_Data_F_Mark",
 			"SA_Uniform",
 		};
 	};
@@ -31,6 +30,7 @@ class CfgVehicles
 			class HitFace
 			{
 				armor=1;
+				name="face_hub";
 				passThrough=0.8;
 				radius=0.08;
 				explosionShielding=0.1;
@@ -39,6 +39,7 @@ class CfgVehicles
 			class HitNeck:HitFace
 			{
 				armor=1;
+				name="neck";
 				passThrough=0.8;
 				radius=0.1;
 				explosionShielding=0.5;
@@ -47,6 +48,7 @@ class CfgVehicles
 			class HitHead:HitNeck
 			{
 				armor=1;
+				name="head";
 				passThrough=0.8;
 				radius=0.2;
 				explosionShielding=0.5;
@@ -56,6 +58,7 @@ class CfgVehicles
 			class HitPelvis:HitHead
 			{
 				armor=6;
+				name="pelvis";
 				passThrough=0.8;
 				radius=0.24;
 				explosionShielding=1;
@@ -64,6 +67,7 @@ class CfgVehicles
 			class HitAbdomen:HitPelvis
 			{
 				armor=1;
+				name="spine1";
 				passThrough=0.8;
 				radius=0.16;
 				explosionShielding=1;
@@ -72,6 +76,7 @@ class CfgVehicles
 			class HitDiaphragm:HitAbdomen
 			{
 				armor=1;
+				name="spine2";
 				passThrough=0.8;
 				radius=0.18;
 				explosionShielding=6;
@@ -80,6 +85,7 @@ class CfgVehicles
 			class HitChest:HitDiaphragm
 			{
 				armor=1;
+				name="spine3";
 				passThrough=0.8;
 				radius=0.18;
 				explosionShielding=6;
@@ -88,6 +94,7 @@ class CfgVehicles
 			class HitBody:HitChest
 			{
 				armor=1000;
+				name="body";
 				material=-1;
 				passThrough=1;
 				radius=0;
@@ -98,6 +105,7 @@ class CfgVehicles
 			class HitArms:HitBody
 			{
 				armor=3;
+				name="arms";
 				passThrough=1;
 				radius=0.1;
 				explosionShielding=1;
@@ -106,6 +114,7 @@ class CfgVehicles
 			class HitHands:HitArms
 			{
 				armor=3;
+				name="arms";
 				passThrough=1;
 				radius=0.1;
 				explosionShielding=1;
@@ -115,6 +124,7 @@ class CfgVehicles
 			class HitLegs:HitHands
 			{
 				armor=6;
+				name="hands";
 				passThrough=0.5;
 				radius=0.1;
 				explosionShielding=0.5;
