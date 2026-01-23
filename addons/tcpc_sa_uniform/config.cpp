@@ -1,8 +1,8 @@
 class CfgPatches
 {
-	class sa_uniforms
+	class tcpc_sa_uniform
 	{
-		name = "SA Uniform Config";
+		name = "TCPC SA Uniform Config";
 		author = "RoutOfWolves";
 		units[] = {};
 		weapons[] = {};

@@ -1,8 +1,8 @@
 class CfgPatches
 {
-	class bxr_uniforms
+	class tcpc_no_uniform
 	{
-		name = "BXR Uniform Config";
+		name = "TCPC NO Uniform Config";
 		author = "RoutOfWolves";
 		units[] = {};
 		weapons[] = {};
@@ -10,9 +10,10 @@ class CfgPatches
 		{
 			"TKE_Uniform_Revamp",
 			"TKE_Rogue_Uniform",
-			"BXR_Uniform",
-			"sa_uniforms",
+			"NO_Uniform",
+			"tcpc_sa_uniform",
 		};
+		skipWhenMissingDependencies = 1;
 	};
 };
 
@@ -35,7 +36,7 @@ class CfgVehicles
 			class HitLegs:HitHands{};
 		};
 	};
-	class BXR_CU10_Uniform_Soldier:SA_CU10_Uniform_Soldier
+	class NO_CU10_Uniform_Soldier:SA_CU10_Uniform_Soldier
 	{
 		class HitPoints:Hitpoints
 		{
